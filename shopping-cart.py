@@ -4,7 +4,9 @@ from dotenv import load_dotenv  # source:https://github.com/theskumar/python-dot
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from datetime import datetime
+
 load_dotenv()
+
 products = [
     {"id": 1, "name": "Chocolate Sandwich Cookies",
         "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -62,16 +64,16 @@ def to_usd(my_price):
     return f"${my_price:,.2f}"  # > $12,000.71
 
 
-# TODO: write some Python code here to produce the desired output
+# Python code
 selected_ids = []
 total_price = 0
-# uses the os module to read the specified environment variable and store it in a corresponding python variable
+
 tax_rate = os.getenv("TAX_RATE", default=0.0875)
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
-SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")
+
 now = datetime.today()
-# Need to get local timezone time
+
 dt_string = now.strftime("%Y/%m/%d %I:%M %p")
+
 while True:
   selected_id = input("Please enter a Product ID (1-20) or type 'DONE':")
   if selected_id == "DONE":
@@ -92,8 +94,7 @@ for selected_id in selected_ids:
   total_price = total_price + matching_prod["price"]
   tax = (total_price * float(tax_rate))
   Total = (total_price + tax)
-  print("+ " + matching_prod["name"] +
-        " (" + to_usd(matching_prod["price"]) + ")")
+  print("+ " + matching_prod["name"] + " (" + to_usd(matching_prod["price"]) + ")")
 print("---------------------------------")
 print("Subtotal:", to_usd(total_price))
 print("Tax:", to_usd(tax))
@@ -101,3 +102,58 @@ print("Total:", to_usd(Total))
 print("---------------------------------")
 print("Thank you, see you again soon!")
 print("---------------------------------")
+#user_email = input("Please enter your email:")
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")
+
+def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=SENDER_EMAIL_ADDRESS):
+    """
+    Sends an email with the specified subject and html contents to the specified recipient,
+
+    If recipient is not specified, sends to the admin's sender address by default.
+    """
+    client = SendGridAPIClient(
+        SENDGRID_API_KEY)  # > <class 'sendgrid.sendgrid.SendGridAPIClient>
+    print("CLIENT:", type(client))
+    print("SUBJECT:", subject)
+    #print("HTML:", html)
+
+    message = Mail(from_email=SENDER_EMAIL_ADDRESS,
+                   to_emails=recipient_address, subject=subject, html_content=html)
+    try:
+        response = client.send(message)
+        # > <class 'python_http_client.client.Response'>
+        print("RESPONSE:", type(response))
+        print(response.status_code)  # > 202 indicates SUCCESS
+        return response
+    except Exception as e:
+        print("OOPS", type(e), e)
+        return None
+
+if __name__ == "__main__":
+ html = ""
+ html += f"<h3>Your e-receipt from Cartaway!</h3>"
+ html += f"<h3>Shopping date: {dt_string}</h3>"
+
+ html += "<ul>"
+ html += f"<p>You have selected {len(selected_ids)} products:</p>"
+ for selected_id in selected_ids:
+    prod = [x for x in products if str(x["id"]) == str(selected_id)]
+    matching_prod = prod[0]
+    total_price = total_price + matching_prod["price"]
+    tax = (total_price * float(tax_rate))
+    Total = (total_price + tax)
+    html += f"<li> {matching_prod['name']} ({to_usd(matching_prod['price'])})</li>"
+html += "</ul>"
+
+
+html += "<ul>"
+html += f"<li>Subtotal: {to_usd(total_price)}</li>"
+html += f"<li>Tax: {to_usd(tax)}</li>"
+html += f"<li>Total: {to_usd(Total)}</li>"
+html += "</ul>"
+
+html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
+
+send_email(subject="Cartaway receipt", html=html)
