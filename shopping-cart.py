@@ -1,4 +1,8 @@
 # shopping_cart.py
+import os
+from dotenv import load_dotenv  # source:https://github.com/theskumar/python-dotenv
+
+load_dotenv()  # invokes / uses the function we got from the third-party package. this one happens to read env vars from the ".env" file. see the "python-dotenv" package docs for more info
 
 from datetime import datetime
 products = [
@@ -61,6 +65,8 @@ def to_usd(my_price):
 # TODO: write some Python code here to produce the desired output
 selected_ids = []
 total_price = 0
+# uses the os module to read the specified environment variable and store it in a corresponding python variable
+tax_rate = os.getenv("TAX_RATE", default=0.0875)
 now = datetime.today()
 # Need to get local timezone time
 dt_string = now.strftime("%Y/%m/%d %I:%M %p")
@@ -82,7 +88,7 @@ for selected_id in selected_ids:
   prod = [x for x in products if str(x["id"]) == str(selected_id)]
   matching_prod = prod[0]
   total_price = total_price + matching_prod["price"]
-  tax = (total_price * 0.0875)
+  tax = (total_price * float(tax_rate))
   Total = (total_price + tax)
   print("+ " + matching_prod["name"] +
         " (" + to_usd(matching_prod["price"]) + ")")

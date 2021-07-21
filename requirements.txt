@@ -1,0 +1,3 @@
+# this is the requirements.txt file
+
+python-dotenv # see: https://github.com/theskumar/python-dotenv
