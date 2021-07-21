@@ -68,7 +68,7 @@ total_price = 0
 # uses the os module to read the specified environment variable and store it in a corresponding python variable
 tax_rate = os.getenv("TAX_RATE", default=0.0875)
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
-SENDER_EMAIL_ADDRESS = os.getenv(default = "SENDER_EMAIL_ADDRESS")
+SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")
 now = datetime.today()
 # Need to get local timezone time
 dt_string = now.strftime("%Y/%m/%d %I:%M %p")
