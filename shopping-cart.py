@@ -1,10 +1,10 @@
 # shopping_cart.py
 import os
 from dotenv import load_dotenv  # source:https://github.com/theskumar/python-dotenv
-
-load_dotenv()  # invokes / uses the function we got from the third-party package. this one happens to read env vars from the ".env" file. see the "python-dotenv" package docs for more info
-
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 from datetime import datetime
+load_dotenv()
 products = [
     {"id": 1, "name": "Chocolate Sandwich Cookies",
         "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -67,6 +67,8 @@ selected_ids = []
 total_price = 0
 # uses the os module to read the specified environment variable and store it in a corresponding python variable
 tax_rate = os.getenv("TAX_RATE", default=0.0875)
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDER_EMAIL_ADDRESS = os.getenv(default = "SENDER_EMAIL_ADDRESS")
 now = datetime.today()
 # Need to get local timezone time
 dt_string = now.strftime("%Y/%m/%d %I:%M %p")
