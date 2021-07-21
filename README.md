@@ -5,7 +5,7 @@
 Navigate to the directory where the repo has been cloned
 
 ```
-cd ~/Desktop/rock-paper-scissors-game
+cd ~/Desktop/shopping-cart
 ```
 
 ## Create Environment

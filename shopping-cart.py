@@ -1,5 +1,6 @@
 # shopping_cart.py
 
+from datetime import datetime
 products = [
     {"id": 1, "name": "Chocolate Sandwich Cookies",
         "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -58,5 +59,37 @@ def to_usd(my_price):
 
 
 # TODO: write some Python code here to produce the desired output
+selected_ids = []
+total_price = 0
+now = datetime.today()
+# Need to get local timezone time
+dt_string = now.strftime("%Y/%m/%d %I:%M %p")
+while True:
+  selected_id = input("Please enter a Product ID (1-20) or type 'DONE':")
+  if selected_id == "DONE":
+    break
+  else:
+    selected_ids.append(selected_id)
 
-print(products)
+print("---------------------------------")
+print("Cartaway")
+print("www.cartaway.com")
+print("---------------------------------")
+print("Checkout at:", dt_string)
+print("---------------------------------")
+print(f"You have selected {len(selected_ids)} products:")
+for selected_id in selected_ids:
+  prod = [x for x in products if str(x["id"]) == str(selected_id)]
+  matching_prod = prod[0]
+  total_price = total_price + matching_prod["price"]
+  tax = (total_price * 0.0875)
+  Total = (total_price + tax)
+  print("+ " + matching_prod["name"] +
+        " (" + to_usd(matching_prod["price"]) + ")")
+print("---------------------------------")
+print("Subtotal:", to_usd(total_price))
+print("Tax:", to_usd(tax))
+print("Total:", to_usd(Total))
+print("---------------------------------")
+print("Thank you, see you again soon!")
+print("---------------------------------")
