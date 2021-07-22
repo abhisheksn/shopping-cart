@@ -75,7 +75,7 @@ total_price = 0
 tax_rate = os.getenv("TAX_RATE", default=0.0875)
 
 #Obtaining the date and time for printing receipt
-# source:https://www.programiz.com/python-programming/datetime/current-datetime
+#source:https://www.programiz.com/python-programming/datetime/current-datetime
 now = datetime.today()
 dt_string = now.strftime("%Y/%m/%d %I:%M %p")
 
@@ -113,7 +113,7 @@ if user_input == "n":
 else:
     user_email = input("Please enter your Email address:")
 
-#source: code from https://github.com/abhisheksn/daily-briefings-py
+#source: code from https://github.com/prof-rossetti/daily-briefings-py
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")
 
@@ -136,7 +136,7 @@ if __name__ == "__main__":
  html += "<img src = https://www.shareicon.net/data/128x128/2016/05/04/759867_food_512x512.png>"
  html += f"<h3>Shopping date: {dt_string}</h3>"
 
- html += f"<h4>You selected {len(selected_ids)} products:</h4>"
+ html += f"<p>You selected <b>{len(selected_ids)}</b> products:</p>"
  html += "<ul>"
  for selected_id in selected_ids:
     prod = [x for x in products if str(x["id"]) == str(selected_id)]
@@ -147,7 +147,7 @@ if __name__ == "__main__":
  html += "<ul>"
  html += f"<li>Subtotal: {to_usd(total_price)}</li>"
  html += f"<li>Tax: {to_usd(tax)}</li>"
- html += f"<li>Total: {to_usd(Total)}</li>"
+ html += f"<li><b>Total: {to_usd(Total)}</b></li>"
  html += "</ul>"
 
  html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
