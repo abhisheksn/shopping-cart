@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ignore the CSV file inventory in the data directory:
+data/products.csv
