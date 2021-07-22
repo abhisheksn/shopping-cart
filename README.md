@@ -64,7 +64,7 @@ python shopping-cart.py
 ## User input
 Upon running the Python script, you will be prompted to enter a Product ID between 1 to 20. Please stick to this range of Product IDs. Once all the products have been selected, type 'DONE' to complete the checkout experience.
 
-Once the checkout has been completed and receipt displayed, you will be asked to type the Email ID to receive an e-receipt. A output of '202' refers to the being successfully sent.
+Once the checkout has been completed and receipt displayed, you will be asked if you want an e-receipt. If you choose "y" then you will be asked to type the Email ID to receive an e-receipt. If you choose "n" then the program will be exited.
 
 > NOTE: If you see an error message, please recheck the SendGrid API account setup and ensure the API Key and Sender Email Address are accurate.
 

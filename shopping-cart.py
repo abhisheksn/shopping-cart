@@ -107,31 +107,24 @@ print("Total:", to_usd(Total))
 print("---------------------------------")
 print("Thank you, see you again soon!")
 print("---------------------------------")
-user_email = input("Please enter your email:")
+user_input = input("Do you want an e-receipt ('y'/'n')?:")
+if user_input == "n":
+    exit()
+else:
+    user_email = input("Please enter your Email address:")
 
 #source: code from https://github.com/abhisheksn/daily-briefings-py
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")
 
 def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=SENDER_EMAIL_ADDRESS):
-    """
-    Sends an email with the specified subject and html contents to the specified recipient,
-
-    If recipient is not specified, sends to the admin's sender address by default.
-    """
-    client = SendGridAPIClient(
-        SENDGRID_API_KEY)  # > <class 'sendgrid.sendgrid.SendGridAPIClient>
-    print("CLIENT:", type(client))
-    print("SUBJECT:", subject)
+    client = SendGridAPIClient(SENDGRID_API_KEY)  # > <class 'sendgrid.sendgrid.SendGridAPIClient>
     #print("HTML:", html)
-
     message = Mail(from_email=SENDER_EMAIL_ADDRESS,
                    to_emails=user_email, subject=subject, html_content=html)
     try:
         response = client.send(message)
-        # > <class 'python_http_client.client.Response'>
-        print("RESPONSE:", type(response))
-        print(response.status_code)  # > 202 indicates SUCCESS
+        print("Email Successfully delivered")  # > 202 indicates SUCCESS
         return response
     except Exception as e:
         print("OOPS", type(e), e)
