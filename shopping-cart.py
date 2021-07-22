@@ -102,7 +102,7 @@ print("Total:", to_usd(Total))
 print("---------------------------------")
 print("Thank you, see you again soon!")
 print("---------------------------------")
-#user_email = input("Please enter your email:")
+user_email = input("Please enter your email:")
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")
@@ -120,7 +120,7 @@ def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</
     #print("HTML:", html)
 
     message = Mail(from_email=SENDER_EMAIL_ADDRESS,
-                   to_emails=recipient_address, subject=subject, html_content=html)
+                   to_emails=user_email, subject=subject, html_content=html)
     try:
         response = client.send(message)
         # > <class 'python_http_client.client.Response'>
@@ -134,26 +134,23 @@ def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</
 if __name__ == "__main__":
  html = ""
  html += f"<h3>Your e-receipt from Cartaway!</h3>"
+ html += "<img src = https://www.shareicon.net/data/128x128/2016/05/04/759867_food_512x512.png>"
  html += f"<h3>Shopping date: {dt_string}</h3>"
 
+ html += f"<h4>You selected {len(selected_ids)} products:</h4>"
  html += "<ul>"
- html += f"<p>You have selected {len(selected_ids)} products:</p>"
  for selected_id in selected_ids:
     prod = [x for x in products if str(x["id"]) == str(selected_id)]
     matching_prod = prod[0]
-    total_price = total_price + matching_prod["price"]
-    tax = (total_price * float(tax_rate))
-    Total = (total_price + tax)
     html += f"<li> {matching_prod['name']} ({to_usd(matching_prod['price'])})</li>"
-html += "</ul>"
+ html += "</ul>"
 
+ html += "<ul>"
+ html += f"<li>Subtotal: {to_usd(total_price)}</li>"
+ html += f"<li>Tax: {to_usd(tax)}</li>"
+ html += f"<li>Total: {to_usd(Total)}</li>"
+ html += "</ul>"
 
-html += "<ul>"
-html += f"<li>Subtotal: {to_usd(total_price)}</li>"
-html += f"<li>Tax: {to_usd(tax)}</li>"
-html += f"<li>Total: {to_usd(Total)}</li>"
-html += "</ul>"
-
-html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
+ html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
 
 send_email(subject="Cartaway receipt", html=html)
