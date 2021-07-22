@@ -7,7 +7,7 @@ from datetime import datetime
 
 load_dotenv()
 
-#If running CSV uncomment lines 9 to 14
+#If running CSV uncomment lines 9 to 16
 #from pandas import read_csv
 
 #csv_filepath = "data/products.csv"
