@@ -15,7 +15,8 @@ load_dotenv()
 #products_df = read_csv("data/products.csv")
 #products = products_df.to_dict("records")
 
-#If running CSV comment lines 19 to 60
+#Hard Coded list of products
+#If running CSV comment lines 20 to 61
 products = [
     {"id": 1, "name": "Chocolate Sandwich Cookies",
         "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -59,28 +60,23 @@ products = [
         "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ]  # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-
+#Converting numeric value to USD formatted string
+#source: Professor Rossetti
 def to_usd(my_price):
-    """
-    Converts a numeric value to usd-formatted string, for printing and display purposes.
-
-    Param: my_price (int or float) like 4000.444444
-
-    Example: to_usd(4000.444444)
-
-    Returns: $4,000.44
-    """
     return f"${my_price:,.2f}"  # > $12,000.71
 
+# Python Script
 
-# Python code
 selected_ids = []
 total_price = 0
 
+#Alter the tax rate by creating a .env file
+# source:https://github.com/theskumar/python-dotenv
 tax_rate = os.getenv("TAX_RATE", default=0.0875)
 
+#Obtaining the date and time for printing receipt
+# source:https://www.programiz.com/python-programming/datetime/current-datetime
 now = datetime.today()
-
 dt_string = now.strftime("%Y/%m/%d %I:%M %p")
 
 while True:
@@ -113,6 +109,7 @@ print("Thank you, see you again soon!")
 print("---------------------------------")
 user_email = input("Please enter your email:")
 
+#source: code from https://github.com/abhisheksn/daily-briefings-py
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")
 
