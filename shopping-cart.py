@@ -145,12 +145,12 @@ if __name__ == "__main__":
     html += f"<li> {matching_prod['name']} ({to_usd(matching_prod['price'])})</li>"
  html += "</ul>"
 
- html += "<ul>"
- html += f"<li>Subtotal: {to_usd(total_price)}</li>"
- html += f"<li>Tax: {to_usd(tax)}</li>"
- html += f"<li>Total: {to_usd(Total)}</li>"
- html += "</ul>"
+html += "<ul>"
+html += f"<li>Subtotal: {to_usd(total_price)}</li>"
+html += f"<li>Tax: {to_usd(tax)}</li>"
+html += f"<li>Total: {to_usd(Total)}</li>"
+html += "</ul>"
 
- html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
+html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
 
 send_email(subject="Cartaway receipt", html=html)
