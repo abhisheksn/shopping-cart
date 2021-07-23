@@ -130,3 +130,6 @@ dmypy.json
 
 # ignore the CSV file inventory in the data directory:
 data/products.csv
+
+# ignore the google api credentials file at the following location:
+auth/google-credentials.json

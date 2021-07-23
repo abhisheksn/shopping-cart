@@ -3,3 +3,6 @@
 python-dotenv # see: https://github.com/theskumar/python-dotenv
 sendgrid==6.6.0
 pandas
+gspread==3.6.0
+oauth2client==4.1.3
+requests
