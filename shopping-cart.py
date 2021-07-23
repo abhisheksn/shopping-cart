@@ -144,11 +144,9 @@ if __name__ == "__main__":
     html += f"<li> {matching_prod['name']} ({to_usd(matching_prod['price'])})</li>"
  html += "</ul>"
 
- html += "<ul>"
- html += f"<li>Subtotal: {to_usd(total_price)}</li>"
- html += f"<li>Tax: {to_usd(tax)}</li>"
- html += f"<li><b>Total: {to_usd(Total)}</b></li>"
- html += "</ul>"
+ html += f"<p>Subtotal: {to_usd(total_price)}</p>"
+ html += f"<p>Tax: {to_usd(tax)}</p>"
+ html += f"<p><b>Total: {to_usd(Total)}</b></p>"
 
  html += f"<h3> Thanks for shopping with Cartaway. See you again soon!</h3>"
 
