@@ -135,6 +135,7 @@ if user_input == "n":
 else:
     user_email = input("Please enter your Email address:")
 
+#Code to send E-receipt
 #source: code from https://github.com/prof-rossetti/daily-briefings-py
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL")

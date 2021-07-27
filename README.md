@@ -55,6 +55,26 @@ SENDER_EMAIL= "________________"
 
 > NOTE:Follow these [SendGrid setup instructions](https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/packages/sendgrid.md#setup) to sign up for a SendGrid account, configure your account's email address (i.e. `SENDER_EMAIL`), and obtain an API key (i.e. `SENDGRID_API_KEY`)
 
+## Setting up Google Sheets
+
+1. Follow [these](https://github.com/prof-rossetti/intro-to-python/blob/main/notes/python/packages/gspread.md) instructions to setup and obtain your Google API credentials ".json" file
+2. Move a copy of the credentials file into your project repository, typically into the root directory or perhaps a directory called "auth", and note its filepath. For the example below, we'll refer to a file called "google-credentials.json" in an "auth" directory (i.e. "auth/google-credentials.json").
+3. Finally, before committing, add the credentials filepath to your repository's ".gitignore" file to ensure it does not get tracked in version control or uploaded to GitHub:
+    ```
+    # this is the .gitignore file
+    # ignore the google api credentials file at the following location:
+    auth/google-credentials.json
+    ```
+4. Use this [example](https://docs.google.com/spreadsheets/d/1s28XMh70eUAWOSSYxnBDs3Jng7olQDwIxxe-d8R-d_I/edit?usp=drive_web&ouid=104152363882296967034) Google Sheet, or create your own. Note the document's unique identifier (e.g. 1s28XMh70eUAWOSSYxnBDs3Jng7olQDwIxxe-d8R-d_I) from its URL, and store the identifier in an environment variable called GOOGLE_SHEET_ID.
+5. If you create your own product inventory list in Google Sheet, make sure the sheet has the column headers - id, name, aisle, department, and price. Name the sheet something unique like "Products-2021" and store the sheet name in an environment variable called SHEET_NAME. Finally, modify the document's sharing settings to grant "edit" privileges to the "client email" address specified in the credentials file.
+    ```
+    #this is the .env file
+    # Google Auth credentials
+    GOOGLE_SHEET_ID= "____________"
+    SHEET_NAME= "______________"
+    ```
+6. Now, in the ["shopping-cart.py"](/shopping-cart.py) file, ensure lines 19 to 38 are uncommented and that lines 11 to 16 and lines 42 to 83 are commented.
+
 ## Run Python Script
 
 ```
@@ -72,38 +92,20 @@ Once the checkout has been completed and receipt displayed, you will be asked if
 
 ## Further Exploration
 
-<b><i>To run the product list from a ".csv" file</b></i>, instead of a hard-coded set of projects or from a Google Sheet, try the following steps.
+<b><i>To run the product list from a ".csv" file</b></i>, instead of a hard-coded set of products or a Google Sheet, try the following steps.
 
 1. In the root directory of your repository, create a folder called "data".
-2. Add your ".csv" file, with the products information to the "data" folder. You can name the ".csv" file as "products.csv"
+2. Add your ".csv" file, with the products information to the "data" folder. You can name the ".csv" file as "products.csv". The ".csv" file can be similar to [this](https://raw.githubusercontent.com/prof-rossetti/intro-to-python/master/data/products.csv).
 3. Update the .gitignore file as follows to ensure your "products.csv" file does not get tracked in version control or uploaded to Github:
    ```
     # this is the .gitignore file
     # ignore the CSV file inventory in the data directory:
     data/products.csv
    ```
-4. Now, in the ["shopping-cart.py"](/shopping-cart.py) file, uncomment lines 11 to 16 and comment the lines 42 to 83. Also, ensure lines 19 to 38 are commented.
+4. Now, in the ["shopping-cart.py"](/shopping-cart.py) file, uncomment lines 11 to 16 and comment the lines 19 to 83.
 5. Run the python script and follow the user input steps as stated above.
 
-<b><i>To run the product list from a Google Sheet</b></i>, instead of a hard-coded set of projects or a ".csv" file, try the following steps.
+<b><i>To run the product list from a hard-coded set of products</b></i>, instead of a Google Sheet or a ".csv" file, try the following steps.
 
-1. Follow [these](https://github.com/prof-rossetti/intro-to-python/blob/main/notes/python/packages/gspread.md) instructions to setup and obtain your Google API credentials ".json" file
-2. Move a copy of the credentials file into your project repository, typically into the root directory or perhaps a directory called "auth", and note its filepath. For the example below, we'll refer to a file called "google-credentials.json" in an "auth" directory (i.e. "auth/google-credentials.json").
-3. Finally, before committing, add the credentials filepath to your repository's ".gitignore" file to ensure it does not get tracked in version control or uploaded to GitHub:
-    ```
-    # this is the .gitignore file
-    # ignore the google api credentials file at the following location:
-    auth/google-credentials.json
-    ```
-4. Use this [example](https://docs.google.com/spreadsheets/d/1s28XMh70eUAWOSSYxnBDs3Jng7olQDwIxxe-d8R-d_I/edit?usp=drive_web&ouid=104152363882296967034) Google Sheet, or create your own. Note the document's unique identifier (e.g. 1s28XMh70eUAWOSSYxnBDs3Jng7olQDwIxxe-d8R-d_I) from its URL, and store the identifier in an environment variable called GOOGLE_SHEET_ID.
-5. If you create your own, make sure it contains a sheet called "Products-2021" with column headers id, name, department, price, and availability_date. If you choose a different sheet name, customize it via an environment variable called SHEET_NAME. Finally, modify the document's sharing settings to grant "edit" privileges to the "client email" address specified in the credentials file.
-    ```
-    #this is the .env file
-    # Google Auth credentials
-    GOOGLE_SHEET_ID= "____________"
-    SHEET_NAME= "______________"
-    ```
-6. Now, in the ["shopping-cart.py"](/shopping-cart.py) file, uncomment lines 19 to 38 and comment the lines 42 to 83. Also, ensure lines 11 to 16 are commented.
-7. Run the python script and follow the user input steps as stated above.
-
-> NOTE: I have used the worksheet "Shopping Clean" from the attached Google Sheet for this project and not "Products-2021".
+1. In the ["shopping-cart.py"](/shopping-cart.py) file, comment lines 11 to 38 and uncomment lines 42 to 83.
+2. Run the python script and follow the user input steps as stated above.
