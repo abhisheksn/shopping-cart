@@ -66,14 +66,15 @@ SENDER_EMAIL= "________________"
     auth/google-credentials.json
     ```
 4. Use this [example](https://docs.google.com/spreadsheets/d/1s28XMh70eUAWOSSYxnBDs3Jng7olQDwIxxe-d8R-d_I/edit?usp=drive_web&ouid=104152363882296967034) Google Sheet, or create your own. Note the document's unique identifier (e.g. 1s28XMh70eUAWOSSYxnBDs3Jng7olQDwIxxe-d8R-d_I) from its URL, and store the identifier in an environment variable called GOOGLE_SHEET_ID.
-5. If you create your own product inventory list in Google Sheet, make sure the sheet has the column headers - id, name, aisle, department, and price. Name the sheet something unique like "Products-2021" and store the sheet name in an environment variable called SHEET_NAME. Finally, modify the document's sharing settings to grant "edit" privileges to the "client email" address specified in the credentials file.
+5. If you create your own product inventory list in Google Sheet, make sure the sheet has the column headers - id, name, aisle, department, and price.
+6. Give the product inventory sheet a unique name ("Products-2021" is the sheet name in the example) and store the sheet name in an environment variable called SHEET_NAME. Finally, modify the document's sharing settings to grant "edit" privileges to the "client email" address specified in the credentials file.
     ```
     #this is the .env file
     # Google Auth credentials
     GOOGLE_SHEET_ID= "____________"
     SHEET_NAME= "______________"
     ```
-6. Now, in the ["shopping-cart.py"](/shopping-cart.py) file, ensure lines 19 to 38 are uncommented and that lines 11 to 16 and lines 42 to 83 are commented.
+7. Now, in the ["shopping-cart.py"](/shopping-cart.py) file, ensure lines 19 to 38 are uncommented and that lines 11 to 16 and lines 42 to 83 are commented.
 
 ## Run Python Script
 
