@@ -105,6 +105,8 @@ while True:
   selected_id = input("Please enter a Product ID (1-20) or type 'DONE':")
   if selected_id == "DONE":
     break
+  elif int(selected_id) not in range(1,20):
+    print("This is not a valid Product ID. Please scan again!")
   else:
     selected_ids.append(selected_id)
 
